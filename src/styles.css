@@ -1,0 +1,155 @@
+:root {
+    --body-color: #dbdde2;
+    --primary-color: #81C784;
+    --secondary-color: #92A8D1;
+    --font-color: #000000;
+    --highlight: #556B2F;
+    --white: #ffffff;
+    --success: #1e741e;
+    --warning: #b18200;
+    --danger: #a70505;
+}
+
+.btn {
+    box-shadow: 2px 2px 4px var(--font-color);
+    transition: 0.3s ease;
+}
+
+.btn:hover {
+    transform: translate3d(0, .125rem, 0);
+    box-shadow: none;
+}
+
+
+.menu-item {
+    transition: 0.3s ease-in;
+}
+
+.menu-item:hover {
+    background-color: #f6f6f6 !important;
+    color: #000000;
+}
+
+.material-symbols-outlined {
+    position: relative;
+    overflow: hidden;
+}
+
+.icon-animation-add {
+    animation-name: cart-icon-add;
+    animation-duration: 0.8s;
+}
+
+.icon-animation-remove {
+    animation-name: reduce-to-0;
+    animation-duration: 1s;
+}
+
+.animation-stock-on {
+    animation-name: vibe;
+    animation-duration: 0.8s;
+}
+
+.carousel-img {
+    height: 450px;
+    width: 850px;
+    object-fit: cover;
+}
+
+.banner-carrousel-img {
+    height: 150px;
+    width: 400px;
+    object-fit: cover;
+}
+
+.slider {
+    height: 100px;
+    margin: auto;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+
+.slider::before,
+.slider::after {
+    background: linear-gradient(to right, white 0%, rgba(255, 255, 255, 0) 100%);
+    content: "";
+    height: 100px;
+    position: absolute;
+    width: 200px;
+    z-index: 2;
+}
+
+.slider::after {
+    right: 0;
+    top: 0;
+    transform: rotateZ(180deg);
+}
+
+.slider::before {
+    left: 0;
+    top: 0;
+}
+
+.slider .slider-track {
+    -webkit-animation: scroll 10s linear infinite;
+    animation: scroll 10s linear infinite;
+    display: flex;
+    width: calc(250px * 14);
+}
+
+.slider .slide {
+    height: 100px;
+    width: 250px;
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0)
+    }
+
+    100% {
+        transform: translateX(calc(-250px * 7));
+    }
+}
+
+@keyframes cart-icon-add {
+    0% {
+        left: 0;
+        rotate: 0deg;
+        opacity: 1
+    }
+
+    to {
+        left: 250%;
+        rotate: -30deg;
+        opacity: 0
+    }
+}
+
+@keyframes reduce-to-0 {
+    0% {
+        opacity: 1;
+        filter: blur(1px);
+    }
+
+    80% {
+        opacity: 0;
+        filter: blur(5px);
+    }
+
+    100% {
+        filter: blur(10px);
+    }
+
+}
+
+@keyframes vibe {
+    0% {
+        background-color: red;
+    }
+
+    100% {
+        background-color: red;
+    }
+}
