@@ -32,11 +32,11 @@ export const Navbar = ({ itemsQuantity, isAuth, handlerLogout }) => {
                             menu_open
                         </span>
                     </button>
-                    <div className="offcanvas offcanvas-end text-bg-dark" tabIndex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+                    <div className="offcanvas offcanvas-end text-bg-dark" tabIndex="-1" id="offcanvasDarkNavbar" style={{ width: '300px' }} aria-labelledby="offcanvasDarkNavbarLabel">
                         <div className="offcanvas-header">
                             <h5 className="offcanvas-title" id="offcanvasDarkNavbarLabel">Nicode SmartShop</h5>
-                            <button type="button" className="btn-close-menu d-flex justify-content-center align-items-center" data-bs-dismiss="offcanvas" aria-label="Close">
-                                <ion-icon name="close-circle-outline"></ion-icon>
+                            <button type="button" className="btn-close-menu d-flex justify-content-center align-items-center text-light" data-bs-dismiss="offcanvas" aria-label="Close">
+                                <ion-icon className="text-light" name="close-circle-outline"></ion-icon>
                             </button>
                         </div>
                         {user &&
