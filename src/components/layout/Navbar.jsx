@@ -1,11 +1,11 @@
 import { NavLink } from "react-router-dom";
 
 
-export const Navbar = ({ itemsQuantity }) => {
-
+export const Navbar = ({ itemsQuantity, isAuth, handlerLogout }) => {
+    const user = JSON.parse(sessionStorage.getItem('login'))?.user || null;
     return (
         <>
-            <nav className="navbar navbar-dark bg-dark sticky-sm-top" >
+            <nav className="navbar navbar-dark bg-dark sticky-top" >
                 <div className="container-fluid">
                     <div className="d-flex align-items-center">
                         <NavLink className="navbar-brand" to="/index">Nicode SmartShop</NavLink>
@@ -35,9 +35,13 @@ export const Navbar = ({ itemsQuantity }) => {
                     <div className="offcanvas offcanvas-end text-bg-dark" tabIndex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
                         <div className="offcanvas-header">
                             <h5 className="offcanvas-title" id="offcanvasDarkNavbarLabel">Nicode SmartShop</h5>
-
-                            <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                            <button type="button" className="btn-close-menu d-flex justify-content-center align-items-center" data-bs-dismiss="offcanvas" aria-label="Close">
+                                <ion-icon name="close-circle-outline"></ion-icon>
+                            </button>
                         </div>
+                        {user &&
+                            <p className="px-4">Bienvenido {user.username}!</p>
+                        }
                         <div className="offcanvas-body p-0">
                             <ul className="navbar-nav justify-content-end flex-grow-1 my-4">
                                 <li className="my-2 p-2 px-4 menu-item">
@@ -49,12 +53,25 @@ export const Navbar = ({ itemsQuantity }) => {
                                 <li className="my-2 p-2 px-4 menu-item">
                                     <NavLink className="dropdown-item px-4" to="/cart">Tu carrito!</NavLink>
                                 </li>
-                                <li className="my-2 p-2 px-4 menu-item">
-                                    <NavLink className="dropdown-item px-4" to="/cart">Iniciar sesión</NavLink>
-                                </li>
-                                <li className="my-2 p-2 px-4 menu-item">
-                                    <NavLink className="dropdown-item px-4" to="/cart">Regístrate!</NavLink>
-                                </li>
+                                {isAuth ?
+                                    <li className="my-2 p-2 px-4 menu-item">
+                                        <a
+                                            className="dropdown-item px-4"
+                                            role="button"
+                                            onClick={handlerLogout}>
+                                            Cerrar sesión
+                                        </a>
+                                    </li>
+                                    :
+                                    <li className="my-2 p-2 px-4 menu-item">
+                                        <NavLink className="dropdown-item px-4" to="/login">Iniciar sesión</NavLink>
+                                    </li>
+                                }
+                                {!isAuth &&
+                                    <li className="my-2 p-2 px-4 menu-item">
+                                        <NavLink className="dropdown-item px-4" to="/register">Regístrate!</NavLink>
+                                    </li>
+                                }
                                 <li className="nav-item px-4">
                                     <form className="d-flex mt-3" role="search">
                                         <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />

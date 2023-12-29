@@ -1,30 +1,36 @@
 import { useEffect, useState } from "react";
 import { getProducts } from "../services/productService";
 import { ShopItem } from "./ShopItem";
-import { BannersCarrousel } from "./BannersCarrousel";
+import { TrademarksCarrousel } from "./layout/TrademarksCarrousel";
 
 
 export const ShopListView = ({ handlerAddProductToCart }) => {
+
     const [products, setProducts] = useState([]);
 
+    const getAllProducts = async () => {
+        const productList = await getProducts();
+        setProducts(productList)
+    }
+
+
     useEffect(() => {
-        setProducts(getProducts());
+        getAllProducts();
     }, []);
 
     return (
         <>
-            <div className="col m-4">
+            <div>
                 {products.map((product) => (
                     <div className="row"
-                        key={product.id}>
+                        key={product.id} >
                         <ShopItem
                             product={product}
                             handlerAddProductToCart={handlerAddProductToCart} />
                     </div>
                 ))}
-            </div>
-
-            <BannersCarrousel />
+                <TrademarksCarrousel />
+            </div >
         </>
     );
 }

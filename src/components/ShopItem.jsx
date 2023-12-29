@@ -11,6 +11,7 @@ export const ShopItem = ({ product, handlerAddProductToCart }) => {
         description,
         price,
         stock,
+        imagePath
     } = product ?? {};
 
     const onAddProductToCart = () => {
@@ -20,6 +21,7 @@ export const ShopItem = ({ product, handlerAddProductToCart }) => {
             description,
             price,
             stock,
+            imagePath,
         };
 
         handlerAddProductToCart({
@@ -64,12 +66,12 @@ export const ShopItem = ({ product, handlerAddProductToCart }) => {
 
     return (
         <>
-            <div className="card m-3 p-2">
-                <div className="row g-0">
-                    <div className="col-md-4">
-                        <img src="./src/assets/ssd.jpg" className="img-fluid rounded-start" alt={name} />
+            <div className="card m-3 p-2 w-75 mx-auto">
+                <div className="row">
+                    <div className="col-md-7">
+                        <img src={imagePath} className="img-fluid rounded-start" alt={name} />
                     </div>
-                    <div className="col-md-8">
+                    <div className="col-md-5">
                         <div className="card-body">
                             <h5 className="card-title">{name}</h5>
                             <p className="card-text m-1">{description}</p>
@@ -80,23 +82,25 @@ export const ShopItem = ({ product, handlerAddProductToCart }) => {
                                 <div>
                                     <label htmlFor={`quantity-${id}`} className="form-label">Cantidad:</label>
                                     <div className="mb-3 d-flex">
-                                        <input
-                                            type="number"
-                                            className="form-control"
-                                            id={`quantity-${id}`}
-                                            value={quantity}
-                                            onChange={handleQuantityChange}
-                                            min="1"
-                                            max={stock}
-                                        />
-                                        <button
-                                            className="btn btn-primary btn-lg d-flex align-items-center justify-content-center mx-2"
-                                            onClick={onAddProductToCart}
-                                        >
-                                            <span className={`material-symbols-outlined ${iconAnimation ? 'icon-animation-add' : ''}`}>
-                                                add_shopping_cart
-                                            </span>
-                                        </button>
+                                        <div className="input-group">
+                                            <input
+                                                type="number"
+                                                className="form-control w-0"
+                                                id={`quantity-${id}`}
+                                                value={quantity}
+                                                onChange={handleQuantityChange}
+                                                min="1"
+                                                max={stock}
+                                            />
+                                            <button
+                                                className="btn btn-primary btn-sm d-flex align-items-center justify-content-center no-shadow"
+                                                onClick={onAddProductToCart}
+                                            >
+                                                <span className={`material-symbols-outlined ${iconAnimation ? 'icon-animation-add' : ''}`}>
+                                                    add_shopping_cart
+                                                </span>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             }

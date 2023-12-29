@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
-import { BannersCarrousel } from "./BannersCarrousel";
-import { TrademarksCarrousel } from "./TrademarksCarrousel";
+import { BannersCarrousel } from "./layout/BannersCarrousel";
+import { TrademarksCarrousel } from "./layout/TrademarksCarrousel";
 
 
 export const Index = () => {
@@ -23,7 +23,9 @@ export const Index = () => {
                     <p>Explora nuestra tienda y encuentra ofertas exclusivas que se adaptan a tus necesidades y estilo de vida.</p>
                     <NavLink className="link-info link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" to="/catalog">Explorar 🚀</NavLink>
                 </section>
-                <BannersCarrousel />
+                <div className="d-flex align-items-center justify-content-center">
+                    <BannersCarrousel />
+                </div>
             </div >
         </>
     );

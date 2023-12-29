@@ -28,7 +28,6 @@ export const CartView = ({ cartItems, handlerRemoveProductFromCart, handlerUpdat
 
     const onUpdateQuantity = (item, increment) => {
         const newQuantity = item.quantity + increment;
-        const newStock = item.product.stock - increment;
 
         if (newQuantity > 0 && newQuantity <= item.product.stock) {
             handlerUpdateQuantity(item, increment);
@@ -62,7 +61,7 @@ export const CartView = ({ cartItems, handlerRemoveProductFromCart, handlerUpdat
                         key={item.product.id}>
                         <div className="row g-0">
                             <div className="col-md-2">
-                                <img src="./src/assets/ssd.jpg" className="img-fluid rounded-start" alt={item.product.name} />
+                                <img src={item.product.imagePath} className="img-fluid rounded-start" alt={item.product.name} />
                             </div>
                             <div className="col-md-10">
                                 <div className="card-body">
