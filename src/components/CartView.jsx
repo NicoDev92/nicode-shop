@@ -77,7 +77,7 @@ export const CartView = ({ cartItems, handlerRemoveProductFromCart, handlerUpdat
                                             <div className="d-flex align-items-center">
                                                 <button
                                                     type="button"
-                                                    className="btn btn-sm btn-primary m-2 d-flex align-items-center justify-content-center"
+                                                    className="btn btn-sm btn-primary m-2 d-flex align-items-center justify-content-center no-shadow"
                                                     onClick={() => onUpdateQuantity(item, 1)}
                                                 >
                                                     <span className="material-symbols-outlined">add</span>
@@ -85,14 +85,14 @@ export const CartView = ({ cartItems, handlerRemoveProductFromCart, handlerUpdat
                                                 <span className="mx-2">{item.quantity}</span>
                                                 <button
                                                     type="button"
-                                                    className="btn btn-sm btn-warning m-2 d-flex align-items-center justify-content-center"
+                                                    className="btn btn-sm btn-primary m-2 d-flex align-items-center justify-content-center no-shadow"
                                                     onClick={() => onUpdateQuantity(item, -1)}
                                                 >
                                                     <span className="material-symbols-outlined text-light">remove</span>
                                                 </button>
                                                 <button
                                                     type="button"
-                                                    className="btn btn-danger btn-sm d-flex align-items-center justify-content-center m-2"
+                                                    className="btn btn-danger btn-sm d-flex align-items-center justify-content-center m-2 no-shadow"
                                                     onClick={() => onRemoveProductFromCart(item.product.id)}
                                                 >
                                                     <span
