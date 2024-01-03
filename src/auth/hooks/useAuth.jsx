@@ -19,14 +19,19 @@ export const useAuth = () => {
     const [login, dispatch] = useReducer(loginReducer, initialLogin);
     const navigate = useNavigate();
 
-    const handlerLogin = (userLogin) => {
-        const isLogin = onLogin(userLogin);
-        if (isLogin) {
-            const user = { username: 'Alejandro' };
+    const handlerLogin = async (userLogin) => {
+        const isLogin = await onLogin(userLogin);
+        if (isLogin.success) {
+            const user = {
+                username: isLogin.message.user.username,
+                role: isLogin.message.role[0],
+                token: isLogin.message.token,
+            };
             dispatch({
                 type: 'login',
                 payload: user,
             });
+
             sessionStorage.setItem('login', JSON.stringify({
                 isAuth: true,
                 user

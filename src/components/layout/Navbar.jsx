@@ -50,8 +50,17 @@ export const Navbar = ({ itemsQuantity, isAuth, handlerLogout }) => {
                                 <li className="my-2 p-2 px-4 menu-item">
                                     <NavLink className="dropdown-item px-4" to="/catalog">Catálogo</NavLink>
                                 </li>
-                                <li className="my-2 p-2 px-4 menu-item">
-                                    <NavLink className="dropdown-item px-4" to="/cart">Tu carrito!</NavLink>
+                                <li className="my-2 p-2 px-4 menu-item  position-relative">
+                                    <NavLink className="dropdown-item px-4" to="/cart">Tu carrito
+                                        {itemsQuantity == 0 ?
+                                            <span className="items-quantity position-absolute top-50 start-50 translate-middle">
+                                                😃
+                                            </span> :
+                                            <span className="items-quantity position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info">
+                                                {itemsQuantity}
+                                            </span>
+                                        }
+                                    </NavLink>
                                 </li>
                                 {isAuth ?
                                     <li className="my-2 p-2 px-4 menu-item">

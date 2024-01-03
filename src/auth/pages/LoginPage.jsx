@@ -2,11 +2,6 @@ import { useEffect, useReducer, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
-const initialLoginForm = {
-    username: '',
-    password: '',
-}
-
 export const LoginPage = ({ login, handlerLogin, initialLoginForm }) => {
     const [showPassword, setShowPassword] = useState(false);
     const [loginForm, setLoginForm] = useState(initialLoginForm);
@@ -104,7 +99,7 @@ export const LoginPage = ({ login, handlerLogin, initialLoginForm }) => {
                             </button>
                         </div>
                     </form>
-                    <div className="card-footer text-body-secondary text-end">
+                    <div className="card-footer text-body-secondary text-center">
                         <p className="fs-7">No tienes una cuenta? Registrate <NavLink to="/register">aquí.</NavLink></p>
                     </div>
                 </div>

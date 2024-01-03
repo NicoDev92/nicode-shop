@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import Swal from "sweetalert2";
+import { registerUser } from "../services/RegisterService";
 
 const initialRegisterForm = {
-    name: "",
-    surname: "",
+    firstName: "",
+    lastName: "",
     email: "",
     password: "",
     dateOfBirth: "",
@@ -17,8 +18,8 @@ export const RegisterPage = () => {
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
     const {
-        name,
-        surname,
+        firstName,
+        lastName,
         email,
         password,
         dateOfBirth,
@@ -52,15 +53,27 @@ export const RegisterPage = () => {
         });
     };
 
+    const handlerRegister = async (formData) => {
+        const response = await registerUser(formData);
+        if (response.success) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Registro exitoso',
+            });
+        } else {
+            showErrorAlert(response.message.error)
+        }
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if (!name) {
+        if (!firstName) {
             showErrorAlert("Debe completar con su nombre");
             return;
         }
 
-        if (!surname) {
+        if (!lastName) {
             showErrorAlert("Debe completar con su apellido");
             return;
         }
@@ -87,6 +100,7 @@ export const RegisterPage = () => {
             return;
         }
 
+        handlerRegister(registerForm);
 
     };
 
@@ -111,29 +125,29 @@ export const RegisterPage = () => {
 
                         <form onSubmit={handleSubmit}>
                             <div className="mb-3">
-                                <label htmlFor="nameInput" className="form-label">
+                                <label htmlFor="firstNameInput" className="form-label">
                                     Nombre
                                 </label>
                                 <input
                                     type="text"
                                     className="form-control w-100"
-                                    id="nameInput"
-                                    name="name"
-                                    value={name}
+                                    id="firstNameInput"
+                                    name="firstName"
+                                    value={firstName}
                                     onChange={onInputChange}
                                 />
                             </div>
 
                             <div className="mb-3">
-                                <label htmlFor="surnameInput" className="form-label">
+                                <label htmlFor="lastNameInput" className="form-label">
                                     Apellido
                                 </label>
                                 <input
                                     type="text"
                                     className="form-control w-100"
-                                    id="surnameInput"
-                                    name="surname"
-                                    value={surname}
+                                    id="lastNameInput"
+                                    name="lastName"
+                                    value={lastName}
                                     onChange={onInputChange}
                                 />
                             </div>
@@ -223,7 +237,7 @@ export const RegisterPage = () => {
                                 </button>
                             </div>
                         </form>
-                        <div className="card-footer text-body-secondary mt-4 text-end">
+                        <div className="card-footer text-body-secondary mt-4 text-center">
                             <p className="fs-7">Ya tienes cuenta? Inicia sesion <NavLink to="/login">aquí.</NavLink></p>
                         </div>
                     </div>
