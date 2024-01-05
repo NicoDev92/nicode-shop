@@ -1,16 +1,18 @@
-import { useEffect, useReducer, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { useAuth } from "../hooks/useAuth";
+import { AuthContext } from "../context/AuthContext";
 
-export const LoginPage = ({ login, handlerLogin, initialLoginForm }) => {
+export const LoginPage = () => {
+    const { login, handlerLogin, initialLoginForm } = useAuth();
+
     const [showPassword, setShowPassword] = useState(false);
+
     const [loginForm, setLoginForm] = useState(initialLoginForm);
-    const navigate = useNavigate()
 
     useEffect(() => {
-        if (login.isAuth) {
-            navigate("/");
-        }
+
     }, [login.isAuth]);
 
     const { username, password } = loginForm;

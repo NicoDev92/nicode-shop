@@ -2,47 +2,45 @@ import { Navigate, Route, Routes } from "react-router-dom"
 import { ShopPage } from "../pages/ShopPage"
 import { CartPage } from "../pages/CartPage"
 import { HomePage } from "../pages/HomePage"
-import { EmptyCart } from "../components/layout/EmptyCart"
 import { RegisterPage } from "../pages/RegisterPage"
 import { LoginPage } from "../auth/pages/LoginPage"
+import { Footer } from "../components/layout/Footer"
+import { Navbar } from "../components/layout/Navbar"
+import { useSelector } from "react-redux"
 
-export const ShopRoutes = ({
-    handlerAddProductToCart,
-    cartItems,
-    handlerRemoveProductFromCart,
-    handlerUpdateQuantity,
-    initialLoginForm,
-    login,
-    dispatch,
-    handlerLogin
-}) => {
+export const ShopRoutes = () => {
 
+    const { isLoadingLogin } = useSelector(state => state.auth)
+
+    if (isLoadingLogin) {
+        return (
+            <div className="container d-flex justify-content-center align-items-center" style={{ height: '50vh' }}>
+                <div className="loader"></div>
+            </div >
+        )
+    }
     return (
-        <Routes>
-            <Route path="index" element={<HomePage />} />
+        <>
 
-            <Route path="/" element={<Navigate to={'/index'} />} />
+            <Navbar />
 
-            <Route path="catalog" element={<ShopPage
-                handlerAddProductToCart={handlerAddProductToCart} />} />
+            <Routes>
+                <Route path="index" element={<HomePage />} />
 
-            <Route path="cart" element={(cartItems?.length > 0 ?
-                <CartPage
-                    cartItems={cartItems}
-                    handlerRemoveProductFromCart={handlerRemoveProductFromCart}
-                    handlerUpdateQuantity={handlerUpdateQuantity} />
-                :
-                <EmptyCart />
-            )} />
+                <Route path="/" element={<Navigate to={'/index'} />} />
 
-            <Route path="register" element={<RegisterPage />} />
+                <Route path="catalog" element={<ShopPage />} />
 
-            <Route path="login" element={<LoginPage
-                initialLoginForm={initialLoginForm}
-                dispatch={dispatch}
-                login={login}
-                handlerLogin={handlerLogin} />} />
+                <Route path="cart" element={<CartPage />} />
 
-        </Routes>
+                <Route path="register" element={<RegisterPage />} />
+
+                <Route path="login" element={<LoginPage />} />
+
+            </Routes>
+
+            <Footer />
+
+        </>
     )
 }

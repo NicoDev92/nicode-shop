@@ -1,9 +1,9 @@
 
 
-export const onLogin = async (userLogin) => {
+export const login = async (userLogin) => {
     let message;
     try {
-        const response = await fetch("http://localhost:7070/usersApi/auth/login", {
+        const response = await fetch(`${import.meta.env.VITE_USERS_API_BASE_URL}/auth/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

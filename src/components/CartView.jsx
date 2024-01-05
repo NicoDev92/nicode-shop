@@ -2,13 +2,21 @@ import { useEffect, useState } from "react";
 import { calculateCartTotal } from "../services/productService";
 import Swal from "sweetalert2";
 import { NavLink } from "react-router-dom";
+import { EmptyCart } from "./layout/EmptyCart";
+import { useShopItems } from "./hooks/useShopItems";
 
-export const CartView = ({ cartItems, handlerRemoveProductFromCart, handlerUpdateQuantity }) => {
+export const CartView = () => {
     const [cartTotal, setCartTotal] = useState(0);
     const [iconAnimations, setIconAnimations] = useState({});
 
+    const { cartItems, handlerRemoveProductFromCart, handlerUpdateQuantity } = useShopItems();
+
     useEffect(() => {
-        setCartTotal(calculateCartTotal(cartItems));
+        if (cartItems) {
+            setCartTotal(calculateCartTotal(cartItems));
+        } else {
+            setCartTotal(0);
+        }
     }, [cartItems]);
 
     const onRemoveProductFromCart = (productId) => {
@@ -28,9 +36,11 @@ export const CartView = ({ cartItems, handlerRemoveProductFromCart, handlerUpdat
 
     const onUpdateQuantity = (item, increment) => {
         const newQuantity = item.quantity + increment;
-
         if (newQuantity > 0 && newQuantity <= item.product.stock) {
-            handlerUpdateQuantity(item, increment);
+            const updatedItem = {
+                ...item,
+            };
+            handlerUpdateQuantity(updatedItem, increment);
         } else if (newQuantity > item.product.stock) {
             Swal.fire({
                 icon: 'error',
@@ -41,12 +51,17 @@ export const CartView = ({ cartItems, handlerRemoveProductFromCart, handlerUpdat
         }
     };
 
+
+
+
     return (
-        <>
+        <>{!cartItems?.length > 0 ?
+            <EmptyCart />
+            :
             <div className="container d-flex flex-column align-items-center justify-content-center my-4">
                 <div className="d-flex justify-content-between w-100">
                     <div>
-                        <h3>Tu carrito!</h3>
+                        <h3>Tu carrito:</h3>
                     </div>
                     <div className=" text-end">
                         <NavLink className="btn btn-info"
@@ -117,7 +132,8 @@ export const CartView = ({ cartItems, handlerRemoveProductFromCart, handlerUpdat
                         <span className="fw-semibold">Total: </span>${cartTotal}
                     </div>
                 </div>
-            </div>
+            </div>}
+
         </>
     );
 };

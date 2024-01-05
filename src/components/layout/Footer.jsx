@@ -3,7 +3,7 @@
 export const Footer = () => {
     return (
         <>
-            <nav className="navbar bg-dark border-bottom border-body mt-4" data-bs-theme="dark">
+            <nav className="navbar bg-dark border-bottom border-body mt-4 flex-end" data-bs-theme="dark">
                 <div className="row text-light w-100">
                     <div className="col navbar-nav flex-grow-1 m-4">
                         <h3 className="fs-5 text-center">Nicode 2023</h3>

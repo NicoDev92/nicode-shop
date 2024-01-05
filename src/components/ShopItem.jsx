@@ -38,11 +38,12 @@ export const ShopItem = ({ product, handlerAddProductToCart }) => {
             timerProgressBar: true,
             didOpen: () => {
                 Swal.showLoading();
-                const timer = Swal.getPopup().querySelector("b");
+                const timer = Swal.getPopup().querySelector(".swal2-timer-progress-bar");
                 timerInterval = setInterval(() => {
                     timer.textContent = `${Swal.getTimerLeft()}`;
                 }, 100);
             },
+
             willClose: () => {
                 clearInterval(timerInterval);
             }

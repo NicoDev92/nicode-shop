@@ -1,14 +1,13 @@
+import { useContext } from "react"
 import { CartView } from "../components/CartView"
+import { ShopItemsContext } from "../context/ShopItemsContext"
 
 
-export const CartPage = ({ cartItems, handlerRemoveProductFromCart, handlerUpdateQuantity }) => {
+export const CartPage = () => {
 
     return (
         <>
-            <CartView
-                cartItems={cartItems}
-                handlerRemoveProductFromCart={handlerRemoveProductFromCart}
-                handlerUpdateQuantity={handlerUpdateQuantity} />
+            <CartView />
         </>
     )
 }

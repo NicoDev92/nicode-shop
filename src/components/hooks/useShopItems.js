@@ -1,11 +1,15 @@
-import { useEffect, useReducer } from "react";
-import { AddProductToCart, AddQuantityProductToCart, RemoveProductFromCart, UpdateQuantityProductToCart } from "../../reducers/itemsReducerActions";
-import { itemsReducer } from "../../reducers/itemsReducer";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+    addProductToCart,
+    updateQuantityProductToCart,
+    addQuantityProductToCart,
+    removeProductFromCart,
+} from "../../store/slices/shop/shopSlice";
 
-
-const initialCartItems = JSON.parse(sessionStorage.getItem('cart')) || [];
 export const useShopItems = () => {
-    const [cartItems, dispatch] = useReducer(itemsReducer, initialCartItems);
+    const { products: cartItems } = useSelector((state) => state.shop);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         sessionStorage.setItem('cart', JSON.stringify(cartItems));
@@ -14,44 +18,31 @@ export const useShopItems = () => {
     const handlerAddProductToCart = (product) => {
         const hasItem = cartItems.find((item) => item.product.id === product.product.id);
         if (hasItem) {
-            dispatch({
-                type: UpdateQuantityProductToCart,
-                payload: product,
-            });
+            dispatch(updateQuantityProductToCart(product));
         } else {
-            dispatch({
-                type: AddProductToCart,
-                payload: product,
-            });
+            dispatch(addProductToCart(product));
         }
-    }
+    };
 
     const handlerUpdateQuantity = (product, increment) => {
         let quantity = parseInt(product.quantity) + increment;
         product.quantity = quantity;
         if (product.quantity < 1) {
-            dispatch({
-                type: RemoveProductFromCart,
-                payload: product.product.id,
-            });
-            return;
+            dispatch(removeProductFromCart(product.product.id));
+        } else {
+            dispatch(updateQuantityProductToCart({ ...product, quantity: quantity }));
         }
-        dispatch({
-            type: AddQuantityProductToCart,
-            payload: product,
-        });
     };
 
     const handlerRemoveProductFromCart = (id) => {
-        dispatch({
-            type: RemoveProductFromCart,
-            payload: id,
-        });
-    }
+        dispatch(removeProductFromCart(id));
+    };
+
+
     return {
         cartItems,
         handlerUpdateQuantity,
         handlerAddProductToCart,
         handlerRemoveProductFromCart,
-    }
-}
+    };
+};

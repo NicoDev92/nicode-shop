@@ -3,7 +3,7 @@
 export const registerUser = async (data) => {
     let message;
     try {
-        const response = await fetch("http://localhost:7070/usersApi/save", {
+        const response = await fetch(`${import.meta.env.VITE_USERS_API_BASE_URL}/save`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

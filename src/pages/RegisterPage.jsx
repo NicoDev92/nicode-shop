@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { registerUser } from "../services/RegisterService";
 
@@ -16,6 +16,7 @@ export const RegisterPage = () => {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const navigate = useNavigate();
 
     const {
         firstName,
@@ -60,6 +61,8 @@ export const RegisterPage = () => {
                 icon: 'success',
                 title: 'Registro exitoso',
             });
+            setRegisterForm(initialRegisterForm);
+            navigate('/login');
         } else {
             showErrorAlert(response.message.error)
         }

@@ -1,11 +1,30 @@
+import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+import { useAuth } from "../../auth/hooks/useAuth";
+import { useShopItems } from "../hooks/useShopItems";
 
 
-export const Navbar = ({ itemsQuantity, isAuth, handlerLogout }) => {
+export const Navbar = () => {
+    const { cartItems } = useShopItems();
+
+    const { login, handlerLogout } = useAuth();
+
+    const [itemsQuantity, setItemsQuantity] = useState(0);
+
+    const [isAuth, setIsAuth] = useState(false);
+
+    useEffect(() => {
+        setIsAuth(login.isAuth);
+    }, [login]);
+
+    useEffect(() => {
+        setItemsQuantity(cartItems?.length);
+    }, [cartItems]);
+
     const user = JSON.parse(sessionStorage.getItem('login'))?.user || null;
     return (
         <>
-            <nav className="navbar navbar-dark bg-dark sticky-top" >
+            <nav className={`navbar sticky-top ${user ? 'navbar-dark bg-dark' : 'navbar-info bg-info'}`} >
                 <div className="container-fluid">
                     <div className="d-flex align-items-center">
                         <NavLink className="navbar-brand" to="/index">Nicode SmartShop</NavLink>
@@ -27,12 +46,21 @@ export const Navbar = ({ itemsQuantity, isAuth, handlerLogout }) => {
                         </div>
 
                     </div>
-                    <button className="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
+                    <button className="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="offcanvas"
+                        data-bs-target="#offcanvasDarkNavbar"
+                        aria-controls="offcanvasDarkNavbar"
+                        aria-label="Toggle navigation">
                         <span className="material-symbols-outlined text-light">
                             menu_open
                         </span>
                     </button>
-                    <div className="offcanvas offcanvas-end text-bg-dark" tabIndex="-1" id="offcanvasDarkNavbar" style={{ width: '300px' }} aria-labelledby="offcanvasDarkNavbarLabel">
+                    <div className={`offcanvas offcanvas-end ${user ? 'text-bg-dark' : 'text-bg-info'}`}
+                        tabIndex="-1"
+                        id="offcanvasDarkNavbar"
+                        style={{ width: '300px' }}
+                        aria-labelledby="offcanvasDarkNavbarLabel">
                         <div className="offcanvas-header">
                             <h5 className="offcanvas-title" id="offcanvasDarkNavbarLabel">Nicode SmartShop</h5>
                             <button type="button" className="btn-close-menu d-flex justify-content-center align-items-center text-light" data-bs-dismiss="offcanvas" aria-label="Close">
@@ -56,7 +84,7 @@ export const Navbar = ({ itemsQuantity, isAuth, handlerLogout }) => {
                                             <span className="items-quantity position-absolute top-50 start-50 translate-middle">
                                                 😃
                                             </span> :
-                                            <span className="items-quantity position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info">
+                                            <span className="items-quantity position-absolute top-25 end-50 translate-middle badge rounded-pill bg-info">
                                                 {itemsQuantity}
                                             </span>
                                         }
