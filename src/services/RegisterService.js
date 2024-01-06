@@ -3,7 +3,8 @@
 export const registerUser = async (data) => {
     let message;
     try {
-        const response = await fetch(`${import.meta.env.VITE_USERS_API_BASE_URL}/save`, {
+        //`${import.meta.env.VITE_USERS_API_BASE_URL}/save`
+        const response = await fetch('https://users-api-vd51.onrender.com/usersApi/save', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

@@ -2,8 +2,8 @@
 
 
 export const getProducts = async () => {
-    try {
-        const response = await fetch(`${import.meta.env.VITE_SHOP_API_BASE_URL}/all/products`)
+    try {//`${import.meta.env.VITE_SHOP_API_BASE_URL}/all/products`
+        const response = await fetch('https://shop-store-api.onrender.com/api/all/products');
         const products = await response.json();
         return products;
     } catch (error) {
@@ -14,8 +14,9 @@ export const getProducts = async () => {
 
 export const getProductsPaged = async (page, elementsPerPage) => {
     try {
+        //`${import.meta.env.VITE_SHOP_API_BASE_URL}/paged-products?page=${page}&elements=${elementsPerPage}`
         const response = await fetch(
-            `${import.meta.env.VITE_SHOP_API_BASE_URL}/paged-products?page=${page}&elements=${elementsPerPage}`
+            `https://shop-store-api.onrender.com/api/paged-products?page=${page}&elements=${elementsPerPage}`
         );
         const products = await response.json();
         return products
@@ -27,8 +28,9 @@ export const getProductsPaged = async (page, elementsPerPage) => {
 
 export const searchProductsPaged = async (keyword, page, elementsPerPage) => {
     try {
+        //`${import.meta.env.VITE_SHOP_API_BASE_URL}/products/search/${keyword}?page=${page}&elements=${elementsPerPage}`
         const response = await fetch(
-            `${import.meta.env.VITE_SHOP_API_BASE_URL}/products/search/${keyword}?page=${page}&elements=${elementsPerPage}`
+            `https://shop-store-api.onrender.com/api/products/search/${keyword}?page=${page}&elements=${elementsPerPage}`
         );
         const products = await response.json();
         return products;
