@@ -3,7 +3,7 @@
 
 export const getProducts = async () => {
     try {//`${import.meta.env.VITE_SHOP_API_BASE_URL}/all/products`
-        const response = await fetch('https://shop-store-api.onrender.com/api/all/products');
+        const response = await fetch('https://shop-store-api.onrender.com/api/all/products',);
         const products = await response.json();
         return products;
     } catch (error) {
