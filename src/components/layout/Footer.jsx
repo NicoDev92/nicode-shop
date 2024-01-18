@@ -11,11 +11,11 @@ export const Footer = () => {
                     <div className="col navbar-nav flex-grow-1 m-4">
                         {<h3 className="fs-5 text-center">Nicode  {currentDate.toLocaleString('es-ES', { year: 'numeric' })}</h3>}
 
-                        <p className="fs-7 p-2">Mahoney CareSys es un proyect ficticio,
+                        <p className="fs-7 p-2">Nicode SmartShop es un proyect ficticio,
                             a fin de demostrar habilidades en React JS, HTML, CSS, JAVA - Spring.
                         </p>
                         <p className="fs-7 p-2">
-                            Las personas mostradas, al igual que sus datos, son ficticias y cualquier parecido con la realidad, es mera coincidencia.
+                            Los productos aquí mostrados, al igual que sus precios y disponibilidad, son ficticios.
                         </p>
                     </div>
                     <div className="col navbar-nav flex-grow-1 m-4">
