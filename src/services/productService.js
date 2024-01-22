@@ -2,13 +2,14 @@
 
 
 export const getProducts = async () => {
-    const response = await fetch(`${import.meta.env.VITE_SHOP_API_BASE_URL}/all/products`,);
-    const products = await response.json();
-    return products;
-} catch (error) {
-    console.error('Error getting products: ', error);
-    throw error;
-}
+    try {
+        const response = await fetch(`${import.meta.env.VITE_SHOP_API_BASE_URL}/all/products`,);
+        const products = await response.json();
+        return products;
+    } catch (error) {
+        console.error('Error getting products: ', error);
+        throw error;
+    }
 }
 
 export const getProductsPaged = async (page, elementsPerPage) => {
