@@ -11,7 +11,6 @@ export const EmailForm = () => {
     const sendEmail = (e) => {
         e.preventDefault();
 
-        // emailjs.sendForm('service_dbqw8wn', 'template_uhzrcym', form.current, 'JrIXh10nYKMIw4rod')
         emailjs.sendForm(import.meta.env.VITE_EMAIL_SERVICE_ID, import.meta.env.VITE_EMAIL_TEMPLATE_ID, form.current, import.meta.env.VITE_EMAIL_PUBLIC_KEY)
             .then((result) => {
                 Swal.fire({
